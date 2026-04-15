@@ -1,0 +1,54 @@
+{
+  "name": "n8n-nodes-abacus",
+  "version": "0.1.0",
+  "description": "n8n community node for Abacus ERP — automate customers, invoices, orders, projects and more",
+  "keywords": [
+    "n8n-community-node-package",
+    "abacus",
+    "erp",
+    "automation"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/your-org/n8n-nodes-abacus",
+  "author": {
+    "name": "Your Name",
+    "email": "you@example.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/n8n-nodes-abacus.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && npm run copy-assets",
+    "copy-assets": "copyfiles -u 3 src/nodes/Abacus/*.svg dist/nodes/Abacus/",
+    "dev": "tsc --watch",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "format": "prettier --write src/**/*.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/AbacusApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/Abacus/Abacus.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "copyfiles": "^2.4.1",
+    "eslint": "^8.0.0",
+    "n8n-workflow": "^1.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  }
+}
