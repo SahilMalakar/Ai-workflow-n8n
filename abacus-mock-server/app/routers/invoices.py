@@ -38,7 +38,7 @@ def create_invoice(
     token: str = Depends(verify_bearer_token),
 ):
     data = invoice_service.create_invoice(db, payload)
-    return success_response(data)
+    return success_response(data, status_code=201)
 
 
 @router.patch("/{invoice_id}")

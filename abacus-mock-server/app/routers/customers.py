@@ -39,7 +39,7 @@ def create_customer(
     token: str = Depends(verify_bearer_token),
 ):
     data = customer_service.create_customer(db, payload)
-    return success_response(data)
+    return success_response(data, status_code=201)
 
 
 @router.patch("/{customer_id}")

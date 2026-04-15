@@ -38,7 +38,7 @@ def create_order(
     token: str = Depends(verify_bearer_token),
 ):
     data = order_service.create_order(db, payload)
-    return success_response(data)
+    return success_response(data, status_code=201)
 
 
 @router.patch("/{order_id}")
