@@ -8,6 +8,7 @@ interface WebhookOptions {
   data?: Record<string, any>;
   pathParams?: Record<string, string | number>;
   headers?: Record<string, string>;
+  fallbackData?: any;
 }
 
 const replacePathParams = (
@@ -28,6 +29,7 @@ export const callWebhook = async ({
   data = {},
   pathParams,
   headers = {},
+  fallbackData,
 }: WebhookOptions): Promise<any> => {
   const resolvedEndpoint = replacePathParams(endpoint, pathParams);
   const url = `${env.N8N_BASE_URL}${resolvedEndpoint}`;
@@ -45,6 +47,11 @@ export const callWebhook = async ({
 
     return response.data;
   } catch (error: any) {
+    if (fallbackData !== undefined && (error.code === 'ECONNREFUSED' || error.response?.status >= 500)) {
+      console.warn(`[Webhook Warning] Upstream offline at ${url}. Using fallback data.`);
+      return { success: true, data: fallbackData, _mocked: true };
+    }
+
     const message =
       error.response?.data?.message ||
       error.response?.data?.detail ||
