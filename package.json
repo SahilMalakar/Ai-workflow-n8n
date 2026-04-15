@@ -1,0 +1,54 @@
+{
+	"name": "n8n-nodes-abacus",
+	"version": "0.1.0",
+	"description": "n8n community node for Abacus ERP REST API (apihub.abacus.ch)",
+	"license": "MIT",
+	"homepage": "https://github.com/SAITS/n8n-nodes-abacus",
+	"keywords": [
+		"n8n-community-node-package"
+	],
+	"author": {
+		"name": "SAITS",
+		"email": "info@saits.ch"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/SAITS/n8n-nodes-abacus.git"
+	},
+	"scripts": {
+		"build": "n8n-node build",
+		"dev": "n8n-node dev",
+		"lint": "n8n-node lint",
+		"lint:fix": "n8n-node lint --fix",
+		"release": "n8n-node release",
+		"prepublishOnly": "n8n-node prerelease"
+	},
+	"files": [
+		"dist"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"credentials": [
+			"dist/credentials/AbacusApi.credentials.js"
+		],
+		"nodes": [
+			"dist/nodes/Abacus/Abacus.node.js"
+		]
+	},
+	"devDependencies": {
+		"@n8n/node-cli": "*",
+		"@types/cors": "^2.8.19",
+		"@types/express": "^5.0.6",
+		"@types/node": "^22.0.0",
+		"n8n-workflow": "*",
+		"typescript": "~5.7.0"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	},
+	"packageManager": "pnpm@10.32.1+sha512.a706938f0e89ac1456b6563eab4edf1d1faf3368d1191fc5c59790e96dc918e4456ab2e67d613de1043d2e8c81f87303e6b40d4ffeca9df15ef1ad567348f2be",
+	"dependencies": {
+		"cors": "^2.8.6",
+		"express": "^5.2.1"
+	}
+}
