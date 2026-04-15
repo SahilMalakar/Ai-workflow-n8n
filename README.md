@@ -2,6 +2,9 @@
 
 > A production-ready n8n community node for automating [Abacus ERP](https://www.abacus.ch) — built with a local mock server for development, an API gateway for routing, and a fully typed TypeScript node published to npm.
 
+**📚 Interactive API Documentation:** [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)  
+All endpoints, request/response schemas, and live testing available via Swagger UI when the mock server is running.
+
 ---
 
 ## What This Project Is
@@ -15,6 +18,28 @@ This project solves that problem end-to-end:
 3. **n8n Community Node** — the main deliverable. A fully typed TypeScript node you install into n8n that lets you automate Abacus ERP operations in any workflow — no HTTP Request node needed.
 
 ---
+
+
+## 🚀 Live API Docs (Swagger UI)
+
+Explore and test all endpoints interactively:
+
+👉 **http://127.0.0.1:8000/docs**
+
+Includes:
+- 🔐 OAuth2 Authentication (token flow)
+- 📍 Addresses
+- 👤 Customers
+- 🧾 Invoices
+- 📦 Orders
+- 📁 Projects
+- 📊 Request/Response schemas
+- 🧪 Try-it-out functionality
+
+> ⚠️ Note: The docs are available only when the mock server is running locally.
+
+---
+
 
 ## Repository Structure
 
@@ -109,8 +134,12 @@ python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env
 uvicorn app.main:app --reload
-# → http://localhost:8000/docs
 ```
+
+**→ Server runs at:** `http://127.0.0.1:8000`  
+**→ Interactive API docs (Swagger UI):** `http://127.0.0.1:8000/docs`
+
+The `/docs` endpoint gives you a full interactive API explorer where you can test every endpoint, see request/response schemas, and execute calls directly from your browser.
 
 ### Seeding test data
 
