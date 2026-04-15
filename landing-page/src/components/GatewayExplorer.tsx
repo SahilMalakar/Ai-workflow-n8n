@@ -1,9 +1,16 @@
 import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { apiService } from '../api.service';
 import type { ResourceType } from '../types';
 
 export default function GatewayExplorer() {
-  const [activeTab, setActiveTab] = useState<ResourceType>('customers');
+  const { module } = useParams<{ module: string }>();
+  const navigate = useNavigate();
+  
+  // Default to customers if no module is specified in URL
+  const initialTab = (module as ResourceType) || 'customers';
+  const [activeTab, setActiveTab] = useState<ResourceType>(initialTab);
+  
   const [data, setData] = useState<any[]>([]);
   const [isMocked, setIsMocked] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -16,6 +23,11 @@ export default function GatewayExplorer() {
     { id: 'projects', label: 'Projects', icon: <ProjectIcon /> },
     { id: 'addresses', label: 'Addresses', icon: <AddressIcon /> },
   ];
+
+  const handleTabChange = (tabId: ResourceType) => {
+    setActiveTab(tabId);
+    navigate(`/explorer/${tabId}`);
+  };
 
   const fetchData = async () => {
     setLoading(true);
@@ -31,6 +43,12 @@ export default function GatewayExplorer() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (module && module !== activeTab) {
+      setActiveTab(module as ResourceType);
+    }
+  }, [module]);
 
   useEffect(() => {
     fetchData();
@@ -56,7 +74,7 @@ export default function GatewayExplorer() {
           {tabs.map((tab) => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => handleTabChange(tab.id)}
               style={{
                 display: 'flex',
                 alignItems: 'center',

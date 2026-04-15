@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import BentoGrid from "./components/BentoGrid";
@@ -23,6 +23,13 @@ function Home() {
   );
 }
 
+function ApiRedirect() {
+  const location = useLocation();
+  const pathParts = location.pathname.split('/');
+  const module = pathParts[pathParts.length - 1];
+  return <Navigate to={`/explorer/${module}`} replace />;
+}
+
 function App() {
   return (
     <div className="app">
@@ -38,6 +45,13 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/explorer" element={<GatewayExplorer />} />
+          <Route path="/explorer/:module" element={<GatewayExplorer />} />
+          
+          {/* Smart Redirect for API-like paths entered in browser */}
+          <Route path="/api/v1/:resource" element={<ApiRedirect />} />
+          
+          {/* Fallback to Home */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 
         <footer style={{ 
