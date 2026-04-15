@@ -38,7 +38,7 @@ def create_project(
     token: str = Depends(verify_bearer_token),
 ):
     data = project_service.create_project(db, payload)
-    return success_response(data)
+    return success_response(data, status_code=201)
 
 
 @router.patch("/{project_id}")

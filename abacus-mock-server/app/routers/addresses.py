@@ -38,7 +38,7 @@ def create_address(
     token: str = Depends(verify_bearer_token),
 ):
     data = address_service.create_address(db, payload)
-    return success_response(data)
+    return success_response(data, status_code=201)
 
 
 @router.patch("/{address_id}")
