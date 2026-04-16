@@ -1,4 +1,4 @@
-import type { IExecuteFunctions, IDataObject, JsonObject } from 'n8n-workflow';
+import type { IExecuteFunctions, IDataObject, JsonObject, IWebhookFunctions, ILoadOptionsFunctions, IHookFunctions } from 'n8n-workflow';
 import { NodeApiError } from 'n8n-workflow';
 
 // ── Constants ─────────────────────────────────────────────────────────────────
@@ -68,7 +68,7 @@ function buildErrorMessage(statusCode: number, endpoint: string): string {
  * Handles 401 token refresh and 429 rate-limit backoff automatically.
  */
 export async function apiRequest(
-  context: IExecuteFunctions,
+  context: IExecuteFunctions | IWebhookFunctions | ILoadOptionsFunctions | IHookFunctions,
   method: HttpMethod,
   endpoint: string,
   body: IDataObject = {},

@@ -14,6 +14,7 @@ from app.routers import (
     invoices,
     orders,
     system,
+    webhooks,
 )
 
 app = FastAPI(
@@ -125,5 +126,12 @@ app.include_router(
     orders.router,
     prefix=f"{BASE_PATH}/orders",
     tags=["Orders"],
+    dependencies=[Depends(verify_token)],
+)
+
+app.include_router(
+    webhooks.router,
+    prefix=f"{BASE_PATH}/webhooks",
+    tags=["Webhooks"],
     dependencies=[Depends(verify_token)],
 )

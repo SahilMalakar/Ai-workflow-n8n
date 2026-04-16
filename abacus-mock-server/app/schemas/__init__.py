@@ -131,3 +131,21 @@ class TokenResponse(BaseModel):
     access_token: str
     token_type: str
     expires_in: int
+
+
+# ---------- WEBHOOK ----------
+class WebhookBase(BaseModel):
+    resource: str
+    event: str
+    url: str
+
+
+class WebhookCreate(WebhookBase):
+    pass
+
+
+class WebhookResponse(WebhookBase):
+    id: str
+
+    class Config:
+        from_attributes = True

@@ -37,7 +37,8 @@
       "dist/credentials/AbacusApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/Abacus/Abacus.node.js"
+      "dist/nodes/Abacus/Abacus.node.js",
+      "dist/nodes/Abacus/AbacusTrigger.node.js"
     ]
   },
   "devDependencies": {
